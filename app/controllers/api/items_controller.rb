@@ -1,6 +1,6 @@
 class Api::ItemsController < ApplicationController
+    before_action :set_department
     before_action :set_item, only: [:show, :update, :destroy]
-    before_action :set_department, only: [:show, :update, :destroy]
   
     def index
       render json: Item.all
@@ -11,8 +11,7 @@ class Api::ItemsController < ApplicationController
     end
   
     def create
-      item = Item.new(item_params)
-  
+      item = @department.items.new(item_params)
       if item.save
         render json: item
       else
@@ -35,7 +34,7 @@ class Api::ItemsController < ApplicationController
   
     private
       def set_department
-        @department = Department.find(params[:id])
+        @department = Department.find(params[:department_id])
       end
 
       def set_item
@@ -43,6 +42,6 @@ class Api::ItemsController < ApplicationController
       end
   
       def item_params
-        params.require(:item).permit(:name, :price, :department)
+        params.require(:item).permit(:name, :price)
       end
   end

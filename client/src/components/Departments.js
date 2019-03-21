@@ -45,6 +45,7 @@ class Departments extends React.Component {
 			</Card.Content > 
 			<Card.Content extra >
 			<Button as = {Link}	to = {`/departments/${department.id}`}	color = "blue" >View </Button>
+			<Button as = {Link}	to = {`/departments/${department.id}`}	color = "green" >Edit </Button>
 			<Button onClick = {() => this.departmentRemove(department.id)} color = "red" >Delete </Button> 
 			</Card.Content >
 			</Card>

@@ -9,9 +9,10 @@ class ItemForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const item = { ...this.state, };
-    axios.post("/api/items", item)
+    // const id = {this.props.history}
+    axios.post(`/api/departments/${this.props.match.params.id}/items`, item)
       .then( res => {
-        this.props.history.push("/items");
+        this.props.history.push(`/departments/${this.props.match.params.id}`);
       })
     this.setState({ ...this.defaultValues, });
   }

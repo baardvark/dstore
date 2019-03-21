@@ -3,23 +3,26 @@ import axios from "axios";
 import { Segment, Header, Button, } from "semantic-ui-react";
 
 class ItemView extends React.Component {
-  state = { item: {}, };
+  state = { item: [], };
 
   componentDidMount() {
-    axios.get(`/api/items/${this.props.match.params.id}`)
+    // debugger
+    const { pathname } = this.props.location
+    // axios.get(`/departments/${this.props.match.params.id}/items/${this.props.match.params.id}`)
+      axios.get('/api'+ pathname)
       .then( res => {
         this.setState({ item: res.data, });
       })
   }
 
   render() {
-    const { name, price } = this.state.item;
+    const { item, } = this.state;
 
     return (
       <div>
         <Segment>
-          <Header as="h1">{ name }</Header>
-          <Header as="h5" color="grey">${ price }</Header>
+          <Header as="h1">{ item.name }</Header>
+          <Header as="h5" color="grey">${ item.price }</Header>
         </Segment>
         <br />
         <br />
